@@ -1,0 +1,6 @@
+{
+  "portInUse": "Port is already in use.",
+  "portRequirePrivilege": "Port requires elevated privileges.",
+  "coordinatesNotfound": "Non-existing address",
+  "outOfServiceArea": "Out of service area"
+}
