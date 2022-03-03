@@ -27,14 +27,12 @@ describe('Home Workflow', () => {
 
   test('should fail with invalid search string.', () => {
     const expectedResponse = {
-      error: {
-        code: StatusCodes.NOT_FOUND,
-        message: 'Not Found'
-      }
+      code: StatusCodes.NOT_FOUND,
+      message: 'Non-existing address'
     };
 
     return request(app)
-      .post('/?search=asdf')
+      .get('/?search=asdf')
       .then((res) => {
         expect(res.status).toBe(StatusCodes.NOT_FOUND);
         expect(res.body).toEqual(expectedResponse);
@@ -43,14 +41,12 @@ describe('Home Workflow', () => {
 
   test('should fail with valid search string outside service area.', () => {
     const expectedResponse = {
-      error: {
-        code: StatusCodes.NOT_FOUND,
-        message: 'Not Found'
-      }
+      code: StatusCodes.NOT_FOUND,
+      message: 'Out of service area'
     };
 
     return request(app)
-      .post('/?search=berlin')
+      .get('/?search=berlin')
       .then((res) => {
         expect(res.status).toBe(StatusCodes.NOT_FOUND);
         expect(res.body).toEqual(expectedResponse);
