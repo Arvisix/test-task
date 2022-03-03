@@ -6,18 +6,14 @@ import app from '../../src/app';
 describe('Home Workflow', () => {
   test('should get successfully with valid search string.', () => {
     const expectedResponse = {
-      code: StatusCodes.OK,
-      message: expect.any(String),
-      data: {
-        status: StatusCodes.OK,
-        search: 'White Bear Yard',
-        location: {
-          city: 'London',
-          lat: 51.5222691,
-          lng: -0.1098115,
-          serviceArea: 'LONCENTRAL',
-          postcode: 'EC1R 5DP'
-        }
+      status: StatusCodes.OK,
+      search: 'White Bear Yard',
+      location: {
+        city: 'London',
+        lat: 51.5222691,
+        lng: -0.1098115,
+        serviceArea: 'LONCENTRAL',
+        postcode: 'EC1R 5DP'
       }
     };
 
@@ -31,8 +27,10 @@ describe('Home Workflow', () => {
 
   test('should fail with invalid search string.', () => {
     const expectedResponse = {
-      code: StatusCodes.NOT_FOUND,
-      message: 'Non-existing address'
+      error: {
+        code: StatusCodes.NOT_FOUND,
+        message: 'Not Found'
+      }
     };
 
     return request(app)
@@ -45,8 +43,10 @@ describe('Home Workflow', () => {
 
   test('should fail with valid search string outside service area.', () => {
     const expectedResponse = {
-      code: StatusCodes.NOT_FOUND,
-      message: 'Out of service area'
+      error: {
+        code: StatusCodes.NOT_FOUND,
+        message: 'Not Found'
+      }
     };
 
     return request(app)
